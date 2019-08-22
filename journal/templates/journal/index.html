@@ -1,0 +1,25 @@
+{% extends 'journal/base.html' %}
+{% block title %}
+    Journals
+{% endblock %}
+{% block body %}
+    <form action="{% url 'journal:add_journal' %}" method="post">
+        {% csrf_token %}
+        <div>
+            <label>Title:</label>
+            <input type="text" name="title">
+        </div>
+        <div>
+            <label>Body:</label>
+            <input type="text" name="body">
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+
+    Journals 
+    {% for journal in journals %}
+        <li>
+            {{ journal }}
+        </li>
+    {% endfor %}
+{% endblock %}
