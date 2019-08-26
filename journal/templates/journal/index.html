@@ -3,6 +3,11 @@
     Journals
 {% endblock %}
 {% block body %}
+    <ul>
+        <p><a href="{% url 'users:login' %}">Log In</a></p>
+        <p><a href="{% url 'users:logout' %}">Log Out</a></p>
+        <p><a href="{% url 'users:signup' %}">Sign Up</a></p>
+    </ul>
     <form action="{% url 'journal:add_journal' %}" method="post">
         {% csrf_token %}
         <div>

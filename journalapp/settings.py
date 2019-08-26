@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['localhost', 'babawale-journal-stage.herokuapp.com', 'babawale-
 # Application definition
 
 INSTALLED_APPS = [
+    'users.apps.UsersConfig',
     'journal.apps.JournalConfig',
     'django.contrib.admin',
     'django.contrib.auth',

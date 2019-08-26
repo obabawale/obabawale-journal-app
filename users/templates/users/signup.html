@@ -1,0 +1,13 @@
+<h1>Login</h1>
+{% if error %}
+    <div>
+        {{ error }}
+    </div>
+{% endif %}
+<form action="{% url 'users:signup' %}" method="post">
+    {% csrf_token %}
+    <input name="username" type="text" placeholder="username"/>
+    <input name="password" type="password" placeholder="password"/>
+    <input name="confirm_password" type="password" placeholder="confirm password"/>
+    <input type="submit" value="Submit"/>
+</form>
