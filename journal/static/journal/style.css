@@ -1,0 +1,40 @@
+#page-wrap {
+    width: 800px;
+    margin: 0 auto;
+}
+header {
+    padding: 20px 0;
+}
+header .row,
+footer .row {
+    display: flex;
+    align-items: center;
+}
+header nav {
+    display: flex;
+    justify-content: flex-end;
+}
+header p {
+    padding: 0 5px;
+    margin: 0;
+}
+p.del-journal a {
+    color: red;
+}
+p.edit-journal {
+    color: blue;
+}
+div.flex header {
+    background: #d2cdcd;
+    font-size: 30px;
+}
+footer.container{
+    background: #d2cdcd;
+}
+header.container{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+div.flex{
+    margin-top: 20px;
+}

@@ -1,41 +1,62 @@
 {% extends 'journal/base.html' %}
+
 {% block title %}
     Journals
 {% endblock %}
 {% block body %}
+    <div id="page_wrap">
+        <header class="container">
+            <div class="row">
+                <h4 class="col-sm-8">Digital Journal | Create A Note</h1>
+                <nav class="col-sm-4">
+                    {% if not user.is_authenticated %}
+                        <p><a href="{% url 'users:login_custom' %}">Log In</a></p>
+                        <p><a href="{% url 'users:signup_custom' %}">Sign Up</a></p>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                        <p><a href="{% url 'users:logout_custom' %}">Log Out</a></p>
+                    {% endif %}
+                </nav>
+            </div>
+        </header>
+    
+        {% if request.user.is_authenticated %}
+        <div class="container">
+            <form action="{% url 'journal:add_journal' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Title:</label>
+                    <input type="text" name="title" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label>Body:</label>
+                    <textarea type="text" name="body" class="form-control"></textarea>
+                </div>
+                <p>Use the form above to create a post. Make sure you fill the title and body fields and press submit</p>
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </form>
+        </div>
+        {% endif %}
 
-    <div>
-        Digital Journal | Create A Note
-        <ul>
-            {% if not user.is_authenticated %}
-                <p><a href="{% url 'users:login_custom' %}">Log In</a></p>
-                <p><a href="{% url 'users:signup_custom' %}">Sign Up</a></p>
-            {% endif %}
-            {% if user.is_authenticated %}
-                <p>Welcome {{ request.user }}</p>
-                <p><a href="{% url 'users:logout_custom' %}">Log Out</a></p>
-            {% endif %}
-        </ul>
+        <div class="container flex">
+            <div class="row">
+                {% for journal in journals %}
+                    <div class="col-sm-4">
+                        <header class="container">
+                            <div class="row">
+                                {{ journal.title }}
+                            </div>
+                        </header>
+                        <div class="body">{{ journal.body }}</div>
+                        <footer class="container">
+                            <div class="row">
+                                <p class="edit-journal">Edit</p>
+                                <p class="del-journal"><a href="{% url 'journal:delete_journal' journal.id %}">Delete</a></p>
+                            </div>
+                        </footer>
+                    </div>
+                {% endfor %}
+            </div>    
+        </div>
     </div>
-    {% if request.user.is_authenticated %}
-        <form action="{% url 'journal:add_journal' %}" method="post">
-            {% csrf_token %}
-            <div>
-                <label>Title:</label>
-                <input type="text" name="title">
-            </div>
-            <div>
-                <label>Body:</label>
-                <input type="text" name="body">
-            </div>
-            <input type="submit" value="Submit">
-        </form>
-    {% endif %}
-
-    Journals 
-    {% for journal in journals %}
-        <li>
-            {{ journal }}
-        </li>
-    {% endfor %}
 {% endblock %}
