@@ -1,11 +1,13 @@
-<h1>Login</h1>
+<h1>Signup</h1>
 {% if error %}
     <div>
         {{ error }}
     </div>
 {% endif %}
-<form action="{% url 'users:signup' %}" method="post">
+<form action="{% url 'users:signup_custom' %}" method="post">
     {% csrf_token %}
+    <input name="name" type="text" placeholder="e.g. John Doe"/>
+    <input name="email" type="text" placeholder="johndoe@gmail.com"/>
     <input name="username" type="text" placeholder="username"/>
     <input name="password" type="password" placeholder="password"/>
     <input name="confirm_password" type="password" placeholder="confirm password"/>

@@ -4,9 +4,11 @@
         {{ error }}
     </div>
 {% endif %}
-<form action="{% url 'users:login' %}" method="post">
+<form action="{% url 'users:login_custom' %}" method="post">
     {% csrf_token %}
     <input name="username" type="text" placeholder="username"/>
     <input name="password" type="password" placeholder="password"/>
-    <input type="submit" value="Login"/>
+    <p>Use the form above to create a post. Make sure you fill the required title and body fields and then press submit.</p>
+    <input type="submit" value="Login" class="btn btn-primary pull-right" />
+    <input type="hidden" name="next" value="{{ next }}" />
 </form>

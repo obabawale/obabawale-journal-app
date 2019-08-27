@@ -1,15 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.contrib.auth.models import User
 
-def login(request):
+def login_view(request):
     context = dict()
     if request.method == 'POST':
-        print("Using post method")
         try:
             username = request.POST['username']
             password = request.POST['password']
@@ -18,29 +17,38 @@ def login(request):
             return render(request, 'users/login.html', context=context)
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            return HttpResponseRedirect(reverse('contact:index'))
+            login(request, user)
+            return HttpResponseRedirect(reverse('journal:index',))
         context["error"] = "invalid credentials"
     return render(request, 'users/login.html', context=context)
 
-def signup(request):
+def signup_view(request):
     context = dict()
     if request.method == 'POST':
         print("Using post method")
         try:
+            full_name = request.POST['name']
+            email = request.POST['email']
             username = request.POST['username']
             password = request.POST['password']
-            confirm_password = request['confirm_password']
+            confirm_password = request.POST['confirm_password']
         except KeyError:
-            context['error'] = "Wrong username/password"
+            context['error'] = "Invalid input"
             return render(request, 'users/signup.html', context=context)
         if password != confirm_password:
             context['message'] = "Passwords Do not match!"
             return render(request, 'users/signup.html', context=context)
+        user = User.objects.create_user(username, email, password)
+        user.first_name = full_name.split(" ")[0]
+        user.last_name = full_name.split(" ")[1]
+        user.save()
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            return HttpResponseRedirect(reverse('contact:index'))
+            login(request, user)
+            return HttpResponseRedirect(reverse('journal:index',))
         context["error"] = "invalid credentials"
     return render(request, 'users/signup.html', context=context)
 
-def logout(request):
-    return HttpResponse("Logout here")
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect(reverse("journal:index"))

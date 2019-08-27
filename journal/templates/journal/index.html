@@ -3,23 +3,34 @@
     Journals
 {% endblock %}
 {% block body %}
-    <ul>
-        <p><a href="{% url 'users:login' %}">Log In</a></p>
-        <p><a href="{% url 'users:logout' %}">Log Out</a></p>
-        <p><a href="{% url 'users:signup' %}">Sign Up</a></p>
-    </ul>
-    <form action="{% url 'journal:add_journal' %}" method="post">
-        {% csrf_token %}
-        <div>
-            <label>Title:</label>
-            <input type="text" name="title">
-        </div>
-        <div>
-            <label>Body:</label>
-            <input type="text" name="body">
-        </div>
-        <input type="submit" value="Submit">
-    </form>
+
+    <div>
+        Digital Journal | Create A Note
+        <ul>
+            {% if not user.is_authenticated %}
+                <p><a href="{% url 'users:login_custom' %}">Log In</a></p>
+                <p><a href="{% url 'users:signup_custom' %}">Sign Up</a></p>
+            {% endif %}
+            {% if user.is_authenticated %}
+                <p>Welcome {{ request.user }}</p>
+                <p><a href="{% url 'users:logout_custom' %}">Log Out</a></p>
+            {% endif %}
+        </ul>
+    </div>
+    {% if request.user.is_authenticated %}
+        <form action="{% url 'journal:add_journal' %}" method="post">
+            {% csrf_token %}
+            <div>
+                <label>Title:</label>
+                <input type="text" name="title">
+            </div>
+            <div>
+                <label>Body:</label>
+                <input type="text" name="body">
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+    {% endif %}
 
     Journals 
     {% for journal in journals %}
