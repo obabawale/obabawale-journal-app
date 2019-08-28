@@ -16,30 +16,33 @@
             {% csrf_token %}
             <div class="form-group">
                 <label>Name</label>
-                <input name="name" type="text" placeholder="e.g. John Doe" class="form-control"/>
+                <div class="">
+                    <input name="first_name" type="text" placeholder="e.g. John" class="form-control" required/>
+                    <input name="last_name" type="text" placeholder="e.g. Doe" class="form-control" required/>
+                </div>
             </div>
 
             <div class="form-group">
                 <label>Email</label>
-                <input name="email" type="email" placeholder="johndoe@gmail.com" class="form-control"/>
+                <input name="email" type="email" placeholder="johndoe@gmail.com" class="form-control" required/>
             </div>
 
             <div class="form-group">
                 <label>Username</label>
-                <input name="username" type="text" placeholder="username" class="form-control"/>
+                <input name="username" type="text" placeholder="username" class="form-control" required/>
             </div>
 
             <div class="form-group">
                 <label>Password</label>
-                <input name="password" type="password" placeholder="password" class="form-control"/>
+                <input name="password" type="password" placeholder="password" class="form-control" required/>
             </div>
             
             <div class="form-group">
                 <label>Confirm Password</label>
-                <input name="confirm_password" type="password" placeholder="confirm password" class="form-control"/>
+                <input name="confirm_password" type="password" placeholder="confirm password" class="form-control" required/>
             </div>
             
-            <div class="col-md-6">
+            <div>
                 <input type="submit" value="Submit" class="btn btn-info"/>
                 <a href="{% url 'users:login_custom' %}" class="btn btn-success">Login</a>
             </div>

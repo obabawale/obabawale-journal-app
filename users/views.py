@@ -27,7 +27,8 @@ def signup_view(request):
     if request.method == 'POST':
         print("Using post method")
         try:
-            full_name = request.POST['name']
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
             email = request.POST['email']
             username = request.POST['username']
             password = request.POST['password']
@@ -39,8 +40,8 @@ def signup_view(request):
             context['message'] = "Passwords Do not match!"
             return render(request, 'users/signup.html', context=context)
         user = User.objects.create_user(username, email, password)
-        user.first_name = full_name.split(" ")[0]
-        user.last_name = full_name.split(" ")[1]
+        user.first_name = first_name
+        user.last_name = last_name
         user.save()
         user = authenticate(request, username=username, password=password)
         if user is not None:
