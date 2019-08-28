@@ -1,0 +1,33 @@
+{% extends 'journal/base.html' %}
+
+{% block title %}
+    Journals
+{% endblock %}
+{% block body %}
+    <div id="edit_page">
+        <header class="container">
+            <div class="row">
+                <h4 class="col-sm-8">Edit Note</h1>
+            </div>
+        </header>
+    
+        {% if request.user.is_authenticated %}
+        <div class="container">
+            {% if error %}
+                <p>{{ error }}
+            {% endif %}
+            <form action="{% url 'journal:edit_journal' journal.id %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Title:</label>
+                    <input type="text" name="title" class="form-control" value="{{ journal.title }}" />
+                </div>
+                <div class="form-group">
+                    <label>Body:</label>
+                    <textarea type="text" name="body" class="form-control">{{ journal.body }}</textarea>
+                </div>
+                <input type="submit" value="Save" class="btn btn-primary"/>
+            </form>
+        </div>
+        {% endif %}
+{% endblock %}

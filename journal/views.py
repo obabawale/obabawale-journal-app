@@ -22,6 +22,22 @@ def delete_journal(request, journal_id):
     try:
         journal = Journal.objects.get(pk=journal_id)
     except Journal.DoesNotExist:
-        raise Http404("Flight does not exist.")
+        raise Http404("Journal does not exist.")
     journal.delete()
     return HttpResponseRedirect(reverse('journal:index'))
+
+def edit_journal(request, journal_id):
+    try:
+        journal = Journal.objects.get(pk=journal_id)
+    except Journal.DoesNotExist:
+        raise Http404("Journal does not exist.")
+    print
+    if request.method == "POST":
+        journal.title = request.POST['title']
+        journal.body = request.POST['body']
+        journal.save()
+        return HttpResponseRedirect(reverse('journal:index'))
+    context = {
+        'journal': journal
+    }
+    return render(request, "journal/edit.html", context)

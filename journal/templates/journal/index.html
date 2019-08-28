@@ -50,7 +50,7 @@
                         <div class="body">{{ journal.body }}</div>
                         <footer class="container">
                             <div class="row">
-                                <p class="edit-journal">Edit</p>
+                                <p class="edit-journal"><a href="{% url 'journal:edit_journal' journal.id %}">Edit</a></p>
                                 <p class="del-journal"><a href="{% url 'journal:delete_journal' journal.id %}">Delete</a></p>
                             </div>
                         </footer>
