@@ -1,41 +1,47 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<h1>Signup</h1>
-{% if error %}
-    <div>
-        {{ error }}
-    </div>
-{% endif %}
-<form action="{% url 'users:signup_custom' %}" method="post">
-    {% csrf_token %}
-    <div class="form-group col-md-6">
-        <label>Name</label>
-        <input name="name" type="text" placeholder="e.g. John Doe" class="form-control"/>
-    </div>
+{% extends 'users/base.html' %}
+{% block head %}
+    Signup
+{% endblock %}
+{% block body %}
+    <div class="main_page">
+        <h1>Signup</h1>
+        {% if error %}
+            <div>
+                {{ error }}
+            </div>
+        {% endif %}
+        <form action="{% url 'users:signup_custom' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group col-md-6">
+                <label>Name</label>
+                <input name="name" type="text" placeholder="e.g. John Doe" class="form-control"/>
+            </div>
 
-    <div class="form-group col-md-6">
-        <label>Email</label>
-        <input name="email" type="email" placeholder="johndoe@gmail.com" class="form-control"/>
-    </div>
+            <div class="form-group col-md-6">
+                <label>Email</label>
+                <input name="email" type="email" placeholder="johndoe@gmail.com" class="form-control"/>
+            </div>
 
-    <div class="form-group col-md-6">
-        <label>Username</label>
-        <input name="username" type="text" placeholder="username" class="form-control"/>
-    </div>
+            <div class="form-group col-md-6">
+                <label>Username</label>
+                <input name="username" type="text" placeholder="username" class="form-control"/>
+            </div>
 
-    <div class="form-group col-md-6">
-        <label>Password</label>
-        <input name="password" type="password" placeholder="password" class="form-control"/>
+            <div class="form-group col-md-6">
+                <label>Password</label>
+                <input name="password" type="password" placeholder="password" class="form-control"/>
+            </div>
+            
+            <div class="form-group col-md-6">
+                <label>Confirm Password</label>
+                <input name="confirm_password" type="password" placeholder="confirm password" class="form-control"/>
+            </div>
+            
+            <div class="col-md-6">
+                <input type="submit" value="Submit" class="btn btn-info"/>
+                <a href="{% url 'users:login_custom' %}" class="btn btn-success">Login</a>
+            </div>
+            
+        </form>
     </div>
-    
-    <div class="form-group col-md-6">
-        <label>Confirm Password</label>
-        <input name="confirm_password" type="password" placeholder="confirm password" class="form-control"/>
-    </div>
-    
-    <div class="col-md-6">
-        <input type="submit" value="Submit" class="btn btn-info"/>
-        <a href="{% url 'users:login_custom' %}" class="btn btn-success">Login</a>
-    </div>
-    
-</form>
+{% endblock %}
