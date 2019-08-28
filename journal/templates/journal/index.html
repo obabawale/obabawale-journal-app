@@ -44,14 +44,22 @@
                     <div class="col-sm-4">
                         <header class="container">
                             <div class="row">
-                                {{ journal.title }}
+                                <div class="col-sm-12">
+                                    {{ journal.title }}
+                                </div>
                             </div>
                         </header>
-                        <div class="body">{{ journal.body }}</div>
+                        <div class="container">
+                            <div class="row">
+                                <p class="col-sm-12">
+                                    {{ journal.body }}
+                                </p>
+                            </div>
+                        </div>
                         <footer class="container">
                             <div class="row">
-                                <p class="edit-journal"><a href="{% url 'journal:edit_journal' journal.id %}">Edit</a></p>
-                                <p class="del-journal"><a href="{% url 'journal:delete_journal' journal.id %}">Delete</a></p>
+                                <p class="edit-journal col-sm-6"><a href="{% url 'journal:edit_journal' journal.id %}">Edit</a></p>
+                                <p class="del-journal col-sm-6"><a href="{% url 'journal:delete_journal' journal.id %}">Delete</a></p>
                             </div>
                         </footer>
                     </div>

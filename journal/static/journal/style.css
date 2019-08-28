@@ -5,11 +5,6 @@
 header {
     padding: 20px 0;
 }
-header .row,
-footer .row {
-    display: flex;
-    align-items: center;
-}
 header nav {
     display: flex;
     justify-content: flex-end;
@@ -20,9 +15,11 @@ header p {
 }
 p.del-journal a {
     color: red;
+    margin-bottom: 0;
 }
-p.edit-journal {
+p.edit-journal, p.del-journal {
     color: blue;
+    margin-bottom: 0;
 }
 div.flex header {
     background: #d2cdcd;
@@ -37,4 +34,23 @@ header.container{
 }
 div.flex{
     margin-top: 20px;
+}
+div.container.flex {
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    padding-top: 10px;
+}
+div.container.flex .col-sm-4 {
+    padding: 10px;
+}
+div.container.flex .col-sm-4 > *{
+    border: .5px solid #e3e3e3;
+}
+header .row,
+footer .row {
+    display: flex;
+    align-items: center;
 }
