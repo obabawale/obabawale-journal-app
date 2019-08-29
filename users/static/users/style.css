@@ -9,3 +9,13 @@ div.main_page {
 .row h4 {
     display: inline-block;
 }
+div.footer {
+    display: flex;
+    justify-content: space-between;   
+}
+.footer .btn.btn-success, .btn.btn-info {
+    float: right;
+}
+/* .btn.btn-info {
+    flo
+} */
