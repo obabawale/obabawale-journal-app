@@ -35,22 +35,6 @@ header.container{
 div.flex{
     margin-top: 20px;
 }
-div.container.flex {
-    display: flex;
-    flex-direction: row;
-    align-content: flex-start;
-    flex-wrap: wrap;
-    margin-top: 20px;
-    padding-top: 10px;
-}
-div.container.flex .col-sm-4 {
-    padding: 10px;
-}
-div.container.flex .col-sm-4 > *{
-    border: .5px solid #e3e3e3;
-}
-header .row,
-footer .row {
-    display: flex;
-    align-items: center;
+.col-sm-4 > * {
+    border: 1px solid #c2bfbf;
 }
